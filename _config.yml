@@ -1,9 +1,10 @@
 title: Sumit Reddy Munnuru
 description: "Network Security & Computer Vision Researcher"
 baseurl: ""  # Leave empty for GitHub Pages
-url: "https://[yourusername].github.io"  # Your GitHub Pages URL
+url: "https://smunnur.github.io"  # Your GitHub Pages URL
 theme: reverie
-
+plugins:
+  - jekyll-seo-tag  # For SEO optimization
 # Social links (edit these)
 linkedin_username: Sumit reddy Munnuru
 github_username: smunnur
