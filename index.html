@@ -2,48 +2,57 @@
 layout: default
 ---
 
-<div class="posts">
-  {% for post in paginator.posts %}
-    <article class="post">
-      <a href="{{ site.baseurl }}{{ post.url }}">
-        <h1>{{ post.title }}</h1>
-
-        <div>
-          <p class="post_date">{{ post.date | date: "%B %e, %Y" }}</p>
-        </div>
-      </a>
-      <div class="entry">
-        {{ post.excerpt }}
-      </div>
-
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
-    </article>
-  {% endfor %}
-
-  <!-- pagination -->
-  {% if paginator.total_pages > 1 %}
-  <div class="pagination">
-    {% if paginator.previous_page %}
-      <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
-    {% else %}
-      <span>&laquo; Prev</span>
-    {% endif %}
-
-    {% for page in (1..paginator.total_pages) %}
-      {% if page == paginator.page %}
-        <span class="webjeda">{{ page }}</span>
-      {% elsif page == 1 %}
-        <a href="{{ '/' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
-      {% else %}
-        <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
-      {% endif %}
-    {% endfor %}
-
-    {% if paginator.next_page %}
-      <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
-    {% else %}
-      <span>Next &raquo;</span>
-    {% endif %}
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Hi, I'm <span class="highlight">[Sumit Reddy Munnuru]</span></h1>
+    <p class="subtitle">Research Assistant in <strong>Network Security</strong> & <strong>Computer Vision</strong> at Clemson University</p>
+    <div class="cta-buttons">
+      <a href="/work-experience" class="button">View My Research</a>
+      <a href="#recent-posts" class="button secondary">Read My Blog</a>
+    </div>
   </div>
-  {% endif %}
-</div>
+</section>
+
+<!-- Featured Projects -->
+<section class="featured-projects">
+  <h2>Featured Research Projects</h2>
+  <div class="project-grid">
+    <div class="project-card">
+      <h3>Intrusion Detection for Vehicular Networks</h3>
+      <p>Developing IDS solutions for V2X communication security</p>
+      <a href="/projects#ids" class="project-link">View Details →</a>
+    </div>
+    <div class="project-card">
+      <h3>3D Reconstruction with NeRF</h3>
+      <p>High-fidelity 3D modeling using Gaussian Splatting</p>
+      <a href="/projects#nerf" class="project-link">View Details →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Recent Blog Posts (Keep your existing code but wrap in section) -->
+<section id="recent-posts" class="blog-preview">
+  <h2>Recent Publications & Notes</h2>
+  <div class="posts">
+    {% for post in paginator.posts limit:3 %}
+      <article class="post">
+        <a href="{{ post.url | relative_url }}">
+          <h3>{{ post.title }}</h3>
+          <p class="post_date">{{ post.date | date: "%B %e, %Y" }}</p>
+          <div class="entry">
+            {{ post.excerpt | truncate: 160 }}
+          </div>
+        </a>
+        {% if post.categories %}
+          <div class="post-categories">
+            {% for category in post.categories %}
+              <span class="category-tag">{{ category }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+  <a href="/blog" class="view-all">View All Posts →</a>
+</section>
